@@ -4,7 +4,6 @@ Element::Element()
 {
 	this->name = "No-know";
 	this->size = -1;
-	this->level = -1;
 	this->first_sector = -1;
 	this->isFolder = false;
 	this->type = "No-know";
@@ -30,15 +29,23 @@ string Element::getName()
 	return this->name;
 }
 
+string padding = "";
+
 void Element::getElement()
 {
-	cout << Element::tabLevel(this->level) << this->name;
+	cout << padding << this->name;
 	
-	cout << "("<< this->first_sector<<")";
-	cout << endl;
+	cout << "("<< this->first_sector<<")\n";
+	if (this->isFolder) {
+		padding += "    ";
+		for (auto c : this->items) {
+			c.getElement();
+		}
+		for (int i = 0; i < 4; ++i) padding.pop_back();
+	}
 }
 
-Element::Element(string name, int first_sector,int level, int size, string type)
+Element::Element(string name, int first_sector, int size, string type)
 {
 	this->name = "";
 	int n = (int)name.size() -1;
@@ -48,20 +55,8 @@ Element::Element(string name, int first_sector,int level, int size, string type)
 	for (int i = 0; i < n+1; i++)
 		this->name += name[i];
 	this->first_sector = first_sector;
-	this->level = level;
 	this->size = size;
 	this->isFolder = size == 0 ? true : false;
 	this->type = type;
 }
 
-string Element::tabLevel(int level)
-{
-	string tab = "";
-	for (int i = 0; i < level; i++)
-		tab += "\t";
-	return tab;
-}
-
-int Element::getLevel() {
-	return level;
-}

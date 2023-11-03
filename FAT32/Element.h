@@ -7,10 +7,9 @@ using namespace std;
 // Class của tập tin, thư mục
 class Element
 {
-protected:
+public:
 	string name;
 	int first_sector;
-	int level;
 	int size;
 	string type;
 	bool isFolder; 
@@ -18,7 +17,7 @@ protected:
 public:
 
 	Element();
-	Element(string name, int first_sector, int level,int size, string type);
+	Element(string name, int first_sector,int size, string type);
 	//Lay kich thuoc cua TT/TM
 	int getSize();
 	//Lay sector dau tien cua TT/TM dat no lam ID
@@ -29,10 +28,6 @@ public:
 	void getElement();
 	//Lay ra ten TT/TM
 	string getName();
-	//Tab phan cap
-	static string tabLevel(int level);
 	//Lấy level
 	int getLevel();
-
-
 };

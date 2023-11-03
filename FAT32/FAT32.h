@@ -10,7 +10,6 @@
 #include<vector>
 #include "Element.h"
 #include<algorithm>
-using namespace std;
 
 class FAT32
 {
@@ -51,10 +50,15 @@ public:
     void Print_BootSector();
 
     //Doc thong tin RDET
-    void Read_RDET_SDET(int sector_index, int level, bool isSDET);
+    void Read_RDET(int sector_index);
+
+    // Read SDET
+    vector<Element> Read_SDET(int sector_index);
 
     //In thong tin RDET
     void Print_RDET();
+
+    Element find(Element e, int id);
 
     //In ra cay thu muc
     void Print_Directory_File_Tree();
