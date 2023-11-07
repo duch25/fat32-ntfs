@@ -29,7 +29,6 @@ int Utility::readSector(LPCWSTR drive, unsigned int readPoint, BYTE*& sector, bo
 	}
 
 	// set a point to read
-
 	LARGE_INTEGER li;
 	if (MFT)
 		li.QuadPart = readPoint * 512;
@@ -378,6 +377,7 @@ int NTFS::readAtrributeFileName(BYTE* entry, int start, string &_fileName) {
 	for (int i = 0; i < exts.size(); ++i) {
 		if (ext == exts[i]) {
 			cout << "\tUse the corresponding software to open this file!" << endl;
+			break;
 		}
 	}
 
@@ -391,10 +391,10 @@ void NTFS::readAtrributeData(BYTE* entry, int start, string _fileName) {
 
 	// print content of text file
 	if (isTxt == true) {
-		int isResident = Utility::getBytes(entry, start + 8, 1);
+		bool isResident = Utility::getBytes(entry, start + 8, 1) ? false : true;
 
 		// read MFT entry
-		if (isResident == 0) {
+		if (isResident) {
 			// get file size
 			int fileSize = Utility::getBytes(entry, start + 16, 4);
 			cout << "\tSize of file: " << fileSize << endl;
