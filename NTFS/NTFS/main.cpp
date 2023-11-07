@@ -29,7 +29,7 @@ int main()
 	// read volume information
 	BYTE *sector = new BYTE[512];
 
-	// read Partion Boot Sector informtation
+	// read Partition Boot Sector informtation
 	if (Utility::readSector(drive, 0, sector))
 	{
 		Utility::printSectorTable(sector);

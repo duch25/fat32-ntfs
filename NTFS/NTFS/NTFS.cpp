@@ -3,6 +3,8 @@
 vector<int> fileID;
 vector<int> parentFileID;
 vector<string> fileNames;
+
+
 bool isTxt = false;
 
 #pragma region Utility
@@ -184,7 +186,7 @@ void Utility::printFolderTree(int index, int level, int pos) {
 		}
 	}
 
-	if (child.empty() == true) {
+	if (child.empty()) {
 		return;
 	}
 	
@@ -424,6 +426,11 @@ void NTFS::readAtrributeData(BYTE* entry, int start, string _fileName) {
 			fin.close();
 		}
 	}
+	else {
+		int fileSize = Utility::getBytes(entry, start + 16, 4);
+		cout << "\tSize of file: " << fileSize << endl;
+	}
+
 	cout << endl;
 }
 #pragma endregion 
